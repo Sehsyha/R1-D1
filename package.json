@@ -7,8 +7,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "electron:build": "vue-cli-service electron:build",
-    "electron:serve": "vue-cli-service electron:serve",
+    "electron:build": "NODE_ENV=production vue-cli-service electron:build",
+    "electron:serve": "NODE_ENV=development vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
@@ -17,6 +17,7 @@
     "core-js": "^3.6.5",
     "nedb": "^1.8.0",
     "nedb-promises": "^4.1.0",
+    "typescript-logging": "^1.0.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.2",
