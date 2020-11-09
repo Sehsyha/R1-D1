@@ -5,8 +5,9 @@ import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-dec
 import { OrganismCategoryModule } from '../OrganismCategoryModule'
 import { OrganismCategory } from '@/models/organismCategory'
 import { CreateOrganismPayload } from './payloads'
+import { getOrganismCategories } from '@/db/organismCategory'
 
-@Module({ dynamic: true, store, name: 'organisation' })
+@Module({ dynamic: true, store, name: 'organisation', namespaced: true })
 export class OrganismModule extends VuexModule {
   private categoryModule = getModule(OrganismCategoryModule)
   organisms: Organism[] = []
@@ -16,28 +17,29 @@ export class OrganismModule extends VuexModule {
   }
 
   @Mutation
-  public setOrganisms(organisms: Organism[]) {
+  public set(organisms: Organism[]) {
     this.organisms = organisms
   }
 
   @Mutation
-  public addOrganism(organism: Organism) {
+  public add(organism: Organism) {
     this.organisms = [...this.organisms, organism]
   }
 
   @Action
   public async init() {
-    return this.fetchOrganisms()
+    return this.fetch()
   }
 
-  @Action({ commit: 'setOrganisms' })
-  public async fetchOrganisms(): Promise<Array<Organism>> {
+  @Action({ commit: 'set' })
+  public async fetch(): Promise<Array<Organism>> {
     const organismEntities = await getOrganisms()
+    const categories = await getOrganismCategories()
 
     return organismEntities.map(organismEntity => {
       let category: OrganismCategory | undefined
       if (organismEntity.categoryId) {
-        category = this.categoryModule.findCategory(organismEntity.categoryId)
+        category = categories.find(categoryInDb => categoryInDb._id === organismEntity.categoryId)
       }
 
       return {
@@ -48,8 +50,8 @@ export class OrganismModule extends VuexModule {
     })
   }
 
-  @Action({ commit: 'addOrganism' })
-  public async createOrganism({ name, categoryId }: CreateOrganismPayload): Promise<Organism> {
+  @Action({ commit: 'add' })
+  public async create({ name, categoryId }: CreateOrganismPayload): Promise<Organism> {
     const organismWithSameName = this.organisms.find(organism => organism.name === name)
     if (organismWithSameName) {
       throw new Error(`Organism with name ${name} already exists`)
@@ -58,7 +60,7 @@ export class OrganismModule extends VuexModule {
     let category: OrganismCategory | undefined
 
     if (categoryId) {
-      category = this.categoryModule.findCategory(categoryId)
+      category = this.categoryModule.find(categoryId)
 
       if (!category) {
         throw new Error(`Category with id ${categoryId} does not exist`)

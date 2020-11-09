@@ -1,11 +1,11 @@
 import store from '.'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
-import { OrganismCategory } from '@/models/organismCategory'
-import { createOrganismCategory, getOrganismCategories } from '@/db/organismCategory'
+import { createDocumentCategory, getDocumentCategories } from '@/db/documentCategory'
+import { DocumentCategory } from '@/models/documentCategory'
 
-@Module({ dynamic: true, store, name: 'organismCategory', namespaced: true })
-export class OrganismCategoryModule extends VuexModule {
-  categories: OrganismCategory[] = []
+@Module({ dynamic: true, store, name: 'documentCategory', namespaced: true })
+export class DocumentCategoryModule extends VuexModule {
+  categories: DocumentCategory[] = []
 
   get all() {
     return this.categories
@@ -16,12 +16,12 @@ export class OrganismCategoryModule extends VuexModule {
   }
 
   @Mutation
-  public set(categories: OrganismCategory[]) {
+  public set(categories: DocumentCategory[]) {
     this.categories = categories
   }
 
   @Mutation
-  public add(category: OrganismCategory) {
+  public add(category: DocumentCategory) {
     this.categories = [...this.categories, category]
   }
 
@@ -31,19 +31,19 @@ export class OrganismCategoryModule extends VuexModule {
   }
 
   @Action({ commit: 'set' })
-  public async fetch(): Promise<Array<OrganismCategory>> {
-    return getOrganismCategories()
+  public async fetch(): Promise<Array<DocumentCategory>> {
+    return getDocumentCategories()
   }
 
   @Action({ commit: 'add' })
-  public async create(name: string): Promise<OrganismCategory> {
+  public async create(name: string): Promise<DocumentCategory> {
     const categoryWithSameName = this.categories.find(category => category.name === name)
 
     if (categoryWithSameName) {
       throw new Error(`Category with name ${name} already exists`)
     }
 
-    const category = await createOrganismCategory(name)
+    const category = await createDocumentCategory(name)
 
     return category
   }
