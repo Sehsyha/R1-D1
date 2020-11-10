@@ -1,15 +1,13 @@
 import store from '..'
 import { createOrganism, getOrganisms } from '@/db/organism'
 import { Organism } from '@/models/organism'
-import { Action, getModule, Module, Mutation, VuexModule } from 'vuex-module-decorators'
-import { OrganismCategoryModule } from '../OrganismCategoryModule'
+import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { OrganismCategory } from '@/models/organismCategory'
 import { CreateOrganismPayload } from './payloads'
 import { getOrganismCategories } from '@/db/organismCategory'
 
-@Module({ dynamic: true, store, name: 'organisation', namespaced: true })
+@Module({ dynamic: true, store, name: 'organism', namespaced: true })
 export class OrganismModule extends VuexModule {
-  private categoryModule = getModule(OrganismCategoryModule)
   organisms: Organism[] = []
 
   get allOrganisms() {
@@ -60,7 +58,9 @@ export class OrganismModule extends VuexModule {
     let category: OrganismCategory | undefined
 
     if (categoryId) {
-      category = this.categoryModule.find(categoryId)
+      const categories = await getOrganismCategories()
+
+      category = categories.find(categoryInDb => categoryInDb._id === categoryId)
 
       if (!category) {
         throw new Error(`Category with id ${categoryId} does not exist`)
