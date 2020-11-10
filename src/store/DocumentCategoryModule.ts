@@ -1,6 +1,6 @@
 import store from '.'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
-import { createDocumentCategory, getDocumentCategories } from '@/db/documentCategory'
+import { createDocumentCategory, getDocumentCategories } from '@/db/documentCategory/requests'
 import { DocumentCategory } from '@/models/documentCategory'
 
 @Module({ dynamic: true, store, name: 'documentCategory', namespaced: true })

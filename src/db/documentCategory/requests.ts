@@ -1,10 +1,6 @@
 import { DocumentCategory } from '@/models/documentCategory'
 import { getDocumentCategoryDb } from '.'
-
-export interface DocumentCategoryEntity {
-  _id?: string;
-  name: string;
-}
+import { DocumentCategoryEntity } from './types'
 
 export async function createDocumentCategory(name: string): Promise<DocumentCategoryEntity> {
   const db = await getDocumentCategoryDb()

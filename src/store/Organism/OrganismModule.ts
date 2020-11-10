@@ -1,10 +1,10 @@
 import store from '..'
-import { createOrganism, getOrganisms } from '@/db/organism'
+import { createOrganism, getOrganisms } from '@/db/organism/requests'
 import { Organism } from '@/models/organism'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { OrganismCategory } from '@/models/organismCategory'
 import { CreateOrganismPayload } from './payloads'
-import { getOrganismCategories } from '@/db/organismCategory'
+import { getOrganismCategories } from '@/db/organismCategory/requests'
 
 @Module({ dynamic: true, store, name: 'organism', namespaced: true })
 export class OrganismModule extends VuexModule {

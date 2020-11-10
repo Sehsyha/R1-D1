@@ -1,10 +1,6 @@
 import { OrganismCategory } from '@/models/organismCategory'
 import { getOrganismCategoryDb } from '.'
-
-export interface OrganismCategoryEntity {
-  _id?: string;
-  name: string;
-}
+import { OrganismCategoryEntity } from './types'
 
 export async function createOrganismCategory(name: string): Promise<OrganismCategoryEntity> {
   const db = await getOrganismCategoryDb()
