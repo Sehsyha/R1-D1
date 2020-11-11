@@ -2,7 +2,7 @@ import { getDocumentCategoryDb } from '.'
 import { DocumentCategoryEntity } from './types'
 
 export async function createDocumentCategory(name: string): Promise<DocumentCategoryEntity> {
-  const db = await getDocumentCategoryDb()
+  const db = getDocumentCategoryDb()
 
   const category: DocumentCategoryEntity = {
     name
@@ -12,7 +12,13 @@ export async function createDocumentCategory(name: string): Promise<DocumentCate
 }
 
 export async function getDocumentCategories(): Promise<DocumentCategoryEntity[]> {
-  const db = await getDocumentCategoryDb()
+  const db = getDocumentCategoryDb()
 
   return db.find({})
+}
+
+export async function getDocumentCategory(_id: string): Promise<DocumentCategoryEntity> {
+  const db = getDocumentCategoryDb()
+
+  return db.findOne({ _id })
 }

@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="createOrganism">
-    <input type="text" v-model="organismName" />
+    <input type="text" v-model="organismName" placeholder="Nom" /><br />
     <select v-model="organismCategoryId">
       <option value="">
         Pas de catégorie
@@ -8,7 +8,7 @@
       <option v-for="category in categories" :key="category._id" :value="category._id">
         {{ category.name }}
       </option>
-    </select>
+    </select><br />
     <input type="submit" value="Créer l'organisme" />
   </form>
 </template>

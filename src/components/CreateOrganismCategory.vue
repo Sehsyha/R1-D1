@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="createOrganismCategory">
-    <input type="text" v-model="organismCategoryName" />
+    <input type="text" v-model="organismCategoryName" placeholder="Nom" /><br />
     <input type="submit" value="Créer la catégorie d'organisme" />
   </form>
 </template>

@@ -3,7 +3,7 @@ import { getOrganismDb } from '.'
 import { OrganismEntity } from './entitiy.types'
 
 export async function createOrganism(payload: CreateOrganismPayload): Promise<OrganismEntity> {
-  const db = await getOrganismDb()
+  const db = getOrganismDb()
 
   const organism: OrganismEntity = {
     name: payload.name,
@@ -14,7 +14,13 @@ export async function createOrganism(payload: CreateOrganismPayload): Promise<Or
 }
 
 export async function getOrganisms(): Promise<OrganismEntity[]> {
-  const db = await getOrganismDb()
+  const db = getOrganismDb()
 
   return db.find({})
+}
+
+export async function getOrganism(_id: string): Promise<OrganismEntity> {
+  const db = getOrganismDb()
+
+  return db.findOne({ _id })
 }

@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="createDocumentCategory">
-    <input type="text" v-model="documentCategoryName" />
+    <input type="text" v-model="documentCategoryName" placeholder="Nom" /><br />
     <input type="submit" value="Créer la catégorie de document" />
   </form>
 </template>

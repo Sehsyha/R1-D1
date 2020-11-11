@@ -1,16 +1,6 @@
 <template>
   <div class="home">
     <div>
-      <h1>Catégorie de document</h1>
-
-      <h2>Création</h2>
-      <CreateDocumentCategory />
-
-      <h2>Tous</h2>
-      <DisplayDocumentCategories />
-    </div>
-
-    <div>
       <h1>Catégorie d'organisme</h1>
 
       <h2>Création</h2>
@@ -28,19 +18,36 @@
       <h2>Tous</h2>
       <DisplayOrganisms />
     </div>
+
+    <div>
+      <h1>Catégorie de document</h1>
+      <h2>Création</h2>
+      <CreateDocumentCategory />
+
+      <h2>Tous</h2>
+      <DisplayDocumentCategories />
+    </div>
+
+    <div>
+      <h1>Document</h1>
+      <h2>Création</h2>
+      <CreateDocument />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Component from 'vue-class-component'
+import { getModule } from 'vuex-module-decorators'
+
 import CreateDocumentCategory from '@/components/CreateDocumentCategory.vue'
 import DisplayDocumentCategories from '@/components/DisplayDocumentCategories.vue'
 import CreateOrganism from '@/components/CreateOrganism.vue'
 import DisplayOrganisms from '@/components/DisplayOrganisms.vue'
 import CreateOrganismCategory from '@/components/CreateOrganismCategory.vue'
 import DisplayOrganismCategories from '@/components/DisplayOrganismCategories.vue'
-import Component from 'vue-class-component'
-import { getModule } from 'vuex-module-decorators'
+import CreateDocument from '@/components/CreateDocument.vue'
 import { OrganismModule } from '@/store/Organism/OrganismModule'
 import { OrganismCategoryModule } from '@/store/OrganismCategory/OrganismCategoryModule'
 import { DocumentCategoryModule } from '@/store/DocumentCategory/DocumentCategoryModule'
@@ -52,7 +59,8 @@ import { DocumentCategoryModule } from '@/store/DocumentCategory/DocumentCategor
     CreateOrganism,
     DisplayOrganisms,
     CreateOrganismCategory,
-    DisplayOrganismCategories
+    DisplayOrganismCategories,
+    CreateDocument
   }
 })
 export default class Home extends Vue {

@@ -21,7 +21,7 @@ export default class DisplayOrganisCategories extends Vue {
   public organismModule: OrganismModule = getModule(OrganismModule)
 
   get organisms() {
-    return this.organismModule.allOrganisms
+    return this.organismModule.all
   }
 }
 </script>
