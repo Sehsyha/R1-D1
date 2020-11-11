@@ -5,7 +5,7 @@ import { config } from 'vuex-module-decorators'
 Vue.use(Vuex)
 
 const store: StoreOptions<{}> = {
-  strict: process.env.NODE_ENV === 'production'
+  strict: process.env.NODE_ENV !== 'production'
 }
 
 config.rawError = true

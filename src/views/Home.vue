@@ -42,8 +42,8 @@ import DisplayOrganismCategories from '@/components/DisplayOrganismCategories.vu
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 import { OrganismModule } from '@/store/Organism/OrganismModule'
-import { OrganismCategoryModule } from '@/store/OrganismCategoryModule'
-import { DocumentCategoryModule } from '@/store/DocumentCategoryModule'
+import { OrganismCategoryModule } from '@/store/OrganismCategory/OrganismCategoryModule'
+import { DocumentCategoryModule } from '@/store/DocumentCategory/DocumentCategoryModule'
 
 @Component({
   components: {
@@ -61,9 +61,13 @@ export default class Home extends Vue {
   public documentCategoryModule = getModule(DocumentCategoryModule)
 
   async created() {
-    await this.organismModule.init()
-    await this.organismCategoryModule.init()
-    await this.documentCategoryModule.init()
+    const promises = [
+      this.organismModule.fetch(),
+      this.organismCategoryModule.fetch(),
+      this.documentCategoryModule.fetch()
+    ]
+
+    await Promise.all(promises)
   }
 }
 </script>

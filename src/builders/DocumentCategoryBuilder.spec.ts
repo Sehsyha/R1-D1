@@ -29,7 +29,7 @@ describe('DocumentCategoryBuilder', () => {
         builder.fromDatabaseEntity(documentCategoryEntity)
         throw new Error("Builder didn't return any error")
       } catch (err) {
-        expect(err.message).toBe('Organism category entity id must be defined')
+        expect(err.message).toBe('Document category entity id must be defined')
       }
     })
 

@@ -4,15 +4,16 @@ import { Organism } from '@/models/organism'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { OrganismCategory } from '@/models/organismCategory'
 import { CreateOrganismPayload } from './payloads'
-import { getOrganismCategories } from '@/db/organismCategory/requests'
+import { getOrganismCategories, getOrganismCategory } from '@/db/organismCategory/requests'
 import { OrganismBuilder } from '@/builders/OrganismBuilder'
 import { OrganismCategoryBuilder } from '@/builders/OrganismCategoryBuilder'
+import { OrganismCategoryEntity } from '@/db/organismCategory/types'
 
 @Module({ dynamic: true, store, name: 'organism', namespaced: true })
 export class OrganismModule extends VuexModule {
   organisms: Organism[] = []
 
-  get allOrganisms() {
+  get all() {
     return this.organisms
   }
 
@@ -24,11 +25,6 @@ export class OrganismModule extends VuexModule {
   @Mutation
   public add(organism: Organism) {
     this.organisms = [...this.organisms, organism]
-  }
-
-  @Action
-  public async init() {
-    return this.fetch()
   }
 
   @Action({ commit: 'set' })
@@ -51,15 +47,16 @@ export class OrganismModule extends VuexModule {
     let category: OrganismCategory | undefined
 
     if (categoryId) {
-      const categoryEntities = await getOrganismCategories()
-      const organismCategoryBuilder = OrganismCategoryBuilder.create()
-      const categories = organismCategoryBuilder.fromDatabaseEntities(categoryEntities)
-
-      category = categories.find(categoryInDb => categoryInDb.id === categoryId)
-
-      if (!category) {
+      let categoryEntity: OrganismCategoryEntity | undefined
+      try {
+        categoryEntity = await getOrganismCategory(categoryId)
+      } catch (err) {
         throw new Error(`Category with id ${categoryId} does not exist`)
       }
+
+      const organismCategoryBuilder = OrganismCategoryBuilder.create()
+
+      category = organismCategoryBuilder.fromDatabaseEntity(categoryEntity)
     }
 
     const organismEntity = await createOrganism({ name, categoryId })

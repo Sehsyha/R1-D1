@@ -1,4 +1,4 @@
-import store from '.'
+import store from '..'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { createDocumentCategory, getDocumentCategories } from '@/db/documentCategory/requests'
 import { DocumentCategory } from '@/models/documentCategory'
@@ -12,7 +12,7 @@ export class DocumentCategoryModule extends VuexModule {
     return this.categories
   }
 
-  get find() {
+  get one() {
     return (id: string) => this.categories.find(category => category.id === id)
   }
 
@@ -26,14 +26,10 @@ export class DocumentCategoryModule extends VuexModule {
     this.categories = [...this.categories, category]
   }
 
-  @Action
-  public async init() {
-    return this.fetch()
-  }
-
   @Action({ commit: 'set' })
   public async fetch(): Promise<Array<DocumentCategory>> {
     const categoryEntities = await getDocumentCategories()
+
     const documentCategoryBuilder = DocumentCategoryBuilder.create()
     return documentCategoryBuilder.fromDatabaseEntities(categoryEntities)
   }
@@ -41,14 +37,13 @@ export class DocumentCategoryModule extends VuexModule {
   @Action({ commit: 'add' })
   public async create(name: string): Promise<DocumentCategory> {
     const categoryWithSameName = this.categories.find(category => category.name === name)
-
     if (categoryWithSameName) {
       throw new Error(`Category with name ${name} already exists`)
     }
 
-    const documentCategoryBuilder = DocumentCategoryBuilder.create()
     const categoryEntity = await createDocumentCategory(name)
 
+    const documentCategoryBuilder = DocumentCategoryBuilder.create()
     return documentCategoryBuilder.fromDatabaseEntity(categoryEntity)
   }
 }

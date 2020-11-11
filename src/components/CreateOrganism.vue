@@ -18,7 +18,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 
-import { OrganismCategoryModule } from '@/store/OrganismCategoryModule'
+import { OrganismCategoryModule } from '@/store/OrganismCategory/OrganismCategoryModule'
 import { CreateOrganismPayload } from '@/store/Organism/payloads'
 import { OrganismModule } from '@/store/Organism/OrganismModule'
 

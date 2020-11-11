@@ -10,7 +10,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 
-import { OrganismCategoryModule } from '@/store/OrganismCategoryModule'
+import { OrganismCategoryModule } from '@/store/OrganismCategory/OrganismCategoryModule'
 
 @Component
 export default class CreateOrganismCategory extends Vue {

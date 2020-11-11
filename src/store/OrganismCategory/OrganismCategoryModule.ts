@@ -1,4 +1,4 @@
-import store from '.'
+import store from '..'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { OrganismCategory } from '@/models/organismCategory'
 import { createOrganismCategory, getOrganismCategories } from '@/db/organismCategory/requests'
@@ -12,7 +12,7 @@ export class OrganismCategoryModule extends VuexModule {
     return this.categories
   }
 
-  get find() {
+  get one() {
     return (id: string) => this.categories.find(category => category.id === id)
   }
 
@@ -24,11 +24,6 @@ export class OrganismCategoryModule extends VuexModule {
   @Mutation
   public add(category: OrganismCategory) {
     this.categories = [...this.categories, category]
-  }
-
-  @Action
-  public async init() {
-    return this.fetch()
   }
 
   @Action({ commit: 'set' })

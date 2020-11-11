@@ -9,7 +9,7 @@ export class DocumentCategoryBuilder extends AbstractBuilder<DocumentCategoryEnt
 
   public fromDatabaseEntity(documentCategoryEntity: DocumentCategoryEntity): DocumentCategory {
     if (!documentCategoryEntity._id) {
-      throw new Error('Organism category entity id must be defined')
+      throw new Error('Document category entity id must be defined')
     }
 
     return {

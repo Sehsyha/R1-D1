@@ -11,7 +11,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 
-import { DocumentCategoryModule } from '@/store/DocumentCategoryModule'
+import { DocumentCategoryModule } from '@/store/DocumentCategory/DocumentCategoryModule'
 
 @Component
 export default class DisplayDocumentCategories extends Vue {

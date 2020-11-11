@@ -35,7 +35,7 @@ describe('OrganismCategoryBuilder', () => {
       }
     })
 
-    it('should create a new organism category from a organism category entity', () => {
+    it('should create a new organism category from an organism category entity', () => {
       const organismCategoryEntity: OrganismCategoryEntity = {
         _id: id,
         name
