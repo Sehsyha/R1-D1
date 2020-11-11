@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:ci": "vue-cli-service test:unit",
     "test:unit": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "electron:build": "NODE_ENV=production vue-cli-service electron:build",
