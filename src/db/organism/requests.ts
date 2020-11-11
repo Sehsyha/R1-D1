@@ -1,12 +1,13 @@
+import { CreateOrganismPayload } from '@/store/Organism/payloads'
 import { getOrganismDb } from '.'
-import { OrganismEntity } from './types'
+import { OrganismEntity } from './entitiy.types'
 
-export async function createOrganism(name: string, categoryId?: string): Promise<OrganismEntity> {
+export async function createOrganism(payload: CreateOrganismPayload): Promise<OrganismEntity> {
   const db = await getOrganismDb()
 
   const organism: OrganismEntity = {
-    name,
-    categoryId
+    name: payload.name,
+    categoryId: payload.categoryId
   }
 
   return db.insert(organism)

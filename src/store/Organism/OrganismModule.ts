@@ -5,6 +5,8 @@ import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { OrganismCategory } from '@/models/organismCategory'
 import { CreateOrganismPayload } from './payloads'
 import { getOrganismCategories } from '@/db/organismCategory/requests'
+import { OrganismBuilder } from '@/builders/OrganismBuilder'
+import { OrganismCategoryBuilder } from '@/builders/OrganismCategoryBuilder'
 
 @Module({ dynamic: true, store, name: 'organism', namespaced: true })
 export class OrganismModule extends VuexModule {
@@ -34,18 +36,9 @@ export class OrganismModule extends VuexModule {
     const organismEntities = await getOrganisms()
     const categories = await getOrganismCategories()
 
-    return organismEntities.map(organismEntity => {
-      let category: OrganismCategory | undefined
-      if (organismEntity.categoryId) {
-        category = categories.find(categoryInDb => categoryInDb._id === organismEntity.categoryId)
-      }
+    const organismBuilder = OrganismBuilder.create().withCategoryEntities(categories)
 
-      return {
-        _id: organismEntity._id,
-        name: organismEntity.name,
-        category
-      }
-    })
+    return organismBuilder.fromDatabaseEntities(organismEntities)
   }
 
   @Action({ commit: 'add' })
@@ -58,19 +51,23 @@ export class OrganismModule extends VuexModule {
     let category: OrganismCategory | undefined
 
     if (categoryId) {
-      const categories = await getOrganismCategories()
+      const categoryEntities = await getOrganismCategories()
+      const organismCategoryBuilder = OrganismCategoryBuilder.create()
+      const categories = organismCategoryBuilder.fromDatabaseEntities(categoryEntities)
 
-      category = categories.find(categoryInDb => categoryInDb._id === categoryId)
+      category = categories.find(categoryInDb => categoryInDb.id === categoryId)
 
       if (!category) {
         throw new Error(`Category with id ${categoryId} does not exist`)
       }
     }
 
-    const organismEntity = await createOrganism(name, categoryId)
+    const organismEntity = await createOrganism({ name, categoryId })
+    const organismBuilder = OrganismBuilder.create()
+    const organism = organismBuilder.fromDatabaseEntity(organismEntity)
 
     return {
-      ...organismEntity,
+      ...organism,
       category
     }
   }

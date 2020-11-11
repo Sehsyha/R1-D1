@@ -1,11 +1,10 @@
-import { DocumentCategory } from '@/models/documentCategory'
 import { getDocumentCategoryDb } from '.'
 import { DocumentCategoryEntity } from './types'
 
 export async function createDocumentCategory(name: string): Promise<DocumentCategoryEntity> {
   const db = await getDocumentCategoryDb()
 
-  const category: DocumentCategory = {
+  const category: DocumentCategoryEntity = {
     name
   }
 

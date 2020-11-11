@@ -2,6 +2,7 @@ import store from '.'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { createDocumentCategory, getDocumentCategories } from '@/db/documentCategory/requests'
 import { DocumentCategory } from '@/models/documentCategory'
+import { DocumentCategoryBuilder } from '@/builders/DocumentCategoryBuilder'
 
 @Module({ dynamic: true, store, name: 'documentCategory', namespaced: true })
 export class DocumentCategoryModule extends VuexModule {
@@ -12,7 +13,7 @@ export class DocumentCategoryModule extends VuexModule {
   }
 
   get find() {
-    return (id: string) => this.categories.find(category => category._id === id)
+    return (id: string) => this.categories.find(category => category.id === id)
   }
 
   @Mutation
@@ -32,7 +33,9 @@ export class DocumentCategoryModule extends VuexModule {
 
   @Action({ commit: 'set' })
   public async fetch(): Promise<Array<DocumentCategory>> {
-    return getDocumentCategories()
+    const categoryEntities = await getDocumentCategories()
+    const documentCategoryBuilder = DocumentCategoryBuilder.create()
+    return documentCategoryBuilder.fromDatabaseEntities(categoryEntities)
   }
 
   @Action({ commit: 'add' })
@@ -43,8 +46,9 @@ export class DocumentCategoryModule extends VuexModule {
       throw new Error(`Category with name ${name} already exists`)
     }
 
-    const category = await createDocumentCategory(name)
+    const documentCategoryBuilder = DocumentCategoryBuilder.create()
+    const categoryEntity = await createDocumentCategory(name)
 
-    return category
+    return documentCategoryBuilder.fromDatabaseEntity(categoryEntity)
   }
 }

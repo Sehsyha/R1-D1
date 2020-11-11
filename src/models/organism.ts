@@ -1,7 +1,7 @@
 import { OrganismCategory } from './organismCategory'
 
 export interface Organism {
-  _id?: string;
+  id: string;
   name: string;
   category?: OrganismCategory;
 }

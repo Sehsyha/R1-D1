@@ -1,4 +1,4 @@
 export interface OrganismCategory {
-  _id?: string;
+  id: string;
   name: string;
 }

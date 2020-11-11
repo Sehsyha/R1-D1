@@ -2,6 +2,7 @@ import store from '.'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { OrganismCategory } from '@/models/organismCategory'
 import { createOrganismCategory, getOrganismCategories } from '@/db/organismCategory/requests'
+import { OrganismCategoryBuilder } from '@/builders/OrganismCategoryBuilder'
 
 @Module({ dynamic: true, store, name: 'organismCategory', namespaced: true })
 export class OrganismCategoryModule extends VuexModule {
@@ -12,7 +13,7 @@ export class OrganismCategoryModule extends VuexModule {
   }
 
   get find() {
-    return (id: string) => this.categories.find(category => category._id === id)
+    return (id: string) => this.categories.find(category => category.id === id)
   }
 
   @Mutation
@@ -32,7 +33,10 @@ export class OrganismCategoryModule extends VuexModule {
 
   @Action({ commit: 'set' })
   public async fetch(): Promise<Array<OrganismCategory>> {
-    return getOrganismCategories()
+    const organismCategoryEntities = await getOrganismCategories()
+    const organismCategoryBuilder = new OrganismCategoryBuilder()
+
+    return organismCategoryBuilder.fromDatabaseEntities(organismCategoryEntities)
   }
 
   @Action({ commit: 'add' })
@@ -43,8 +47,9 @@ export class OrganismCategoryModule extends VuexModule {
       throw new Error(`Category with name ${name} already exists`)
     }
 
-    const category = await createOrganismCategory(name)
+    const organismCategoryBuilder = OrganismCategoryBuilder.create()
+    const categoryEntity = await createOrganismCategory(name)
 
-    return category
+    return organismCategoryBuilder.fromDatabaseEntity(categoryEntity)
   }
 }

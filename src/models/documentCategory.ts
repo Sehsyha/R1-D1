@@ -1,4 +1,4 @@
 export interface DocumentCategory {
-  _id?: string;
+  id: string;
   name: string;
 }
