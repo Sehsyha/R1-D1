@@ -1,3 +1,4 @@
+import { Organism } from './Organism'
 import { OrganismCategoryRepository } from './OrganismCategoryRepository'
 import { OrganismRepository } from './OrganismRepository'
 
@@ -19,12 +20,9 @@ export class OrganismService {
       throw new Error(`L'organisme avec le nom ${name} existe déjà`)
     }
 
-    const possibleCategories = await this.organismCategoryRepository.findAll()
-    const existingCategory = possibleCategories.find(category => category.getId() === categoryId)
-    if (!existingCategory) {
-      throw new Error(`La catégorie ${categoryId} n'existe pas`)
-    }
+    const category = await this.organismCategoryRepository.findById(categoryId)
+    const organism = new Organism(name, category)
 
-    return this.organismRepository.create(name, categoryId)
+    return this.organismRepository.create(organism)
   }
 }
