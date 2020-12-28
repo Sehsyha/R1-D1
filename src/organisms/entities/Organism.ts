@@ -1,4 +1,4 @@
-import { OrganismCategory } from '@/organisms/domain/organismCategory'
+import { OrganismCategory } from '@/organisms/entities/organismCategory'
 
 export class Organism {
   private id: string

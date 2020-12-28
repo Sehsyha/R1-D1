@@ -2,10 +2,12 @@
   <form @submit.prevent="createOrganism">
     <input type="text" v-model="organismName" />
     <select v-model="organismCategoryId">
-      <option value="">
-        Pas de catégorie
-      </option>
-      <option v-for="category in categories" :key="category._id" :value="category._id">
+      <option value="">Pas de catégorie</option>
+      <option
+        v-for="category in categories"
+        :key="category._id"
+        :value="category._id"
+      >
         {{ category.name }}
       </option>
     </select>
@@ -18,9 +20,9 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 
-import { OrganismCategoryModule } from '@/store/OrganismCategory/OrganismCategoryModule'
-import { CreateOrganismPayload } from '@/store/Organism/payloads'
-import { OrganismModule } from '@/store/Organism/OrganismModule'
+import { CreateOrganismPayload } from '@/organisms/store/payloads'
+import { OrganismModule } from '@/organisms/store/OrganismModule'
+import { OrganismCategoryModule } from '@/organisms/store/OrganismCategoryModule'
 
 @Component
 export default class CreateOrganism extends Vue {
@@ -35,11 +37,10 @@ export default class CreateOrganism extends Vue {
   }
 
   public createOrganism() {
-    if (this.organismName) {
-      const categoryId = this.organismCategoryId ? this.organismCategoryId : undefined
+    if (this.organismName && this.organismCategoryId) {
       const payload: CreateOrganismPayload = {
         name: this.organismName,
-        categoryId
+        categoryId: this.organismCategoryId
       }
 
       this.organismModule.create(payload)

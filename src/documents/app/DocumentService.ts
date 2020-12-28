@@ -1,5 +1,5 @@
 import { OrganismRepository } from '@/organisms/app/OrganismRepository'
-import { Document } from '../domain/Document'
+import { Document } from '../entities/Document'
 import { DocumentCategoryRepository } from './DocumentCategoryRepository'
 import { DocumentRepository } from './DocumentRepository'
 

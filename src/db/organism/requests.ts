@@ -1,4 +1,4 @@
-import { CreateOrganismPayload } from '@/store/Organism/payloads'
+import { CreateOrganismPayload } from '@/organisms/store/payloads'
 import { getOrganismDb } from '.'
 import { OrganismEntity } from './entitiy.types'
 

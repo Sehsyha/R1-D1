@@ -1,5 +1,5 @@
 import { GenerationService } from '@/common/app/GenerationService'
-import { OrganismCategory } from '../domain/organismCategory'
+import { OrganismCategory } from '../entities/OrganismCategory'
 import { OrganismCategoryRepository } from './OrganismCategoryRepository'
 
 export class OrganismCategoryService {
@@ -14,7 +14,7 @@ export class OrganismCategoryService {
     this.generationService = generationService
   }
 
-  public create(name: string): Promise<void> {
+  public async create(name: string): Promise<OrganismCategory> {
     const existingCategory = this.organismCategoryRepository.findByName(name)
     if (existingCategory) {
       throw new Error(`La catégorie ${name} existe déjà`)
@@ -23,6 +23,12 @@ export class OrganismCategoryService {
     const id = this.generationService.id()
     const organismCategory = new OrganismCategory(id, name)
 
-    return this.organismCategoryRepository.create(organismCategory)
+    await this.organismCategoryRepository.create(organismCategory)
+
+    return organismCategory
+  }
+
+  public async getAll(): Promise<OrganismCategory[]> {
+    return this.organismCategoryRepository.getAll()
   }
 }

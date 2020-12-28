@@ -1,4 +1,4 @@
-import { Document } from '../domain/Document'
+import { Document } from '../entities/Document'
 
 export interface DocumentRepository {
   create(document: Document): Promise<void>;

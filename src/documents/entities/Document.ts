@@ -1,4 +1,4 @@
-import { Organism } from '@/organisms/domain/Organism'
+import { Organism } from '@/organisms/entities/Organism'
 import { DocumentCategory } from './DocumentCategory'
 
 export class Document {

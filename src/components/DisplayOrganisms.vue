@@ -14,14 +14,14 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 
-import { OrganismModule } from '@/store/Organism/OrganismModule'
+import { OrganismModule } from '@/organisms/store/OrganismModule'
 
 @Component
 export default class DisplayOrganisCategories extends Vue {
   public organismModule: OrganismModule = getModule(OrganismModule)
 
   get organisms() {
-    return this.organismModule.allOrganisms
+    return this.organismModule.all
   }
 }
 </script>

@@ -1,4 +1,4 @@
 export interface CreateOrganismPayload {
   name: string;
-  categoryId?: string;
+  categoryId: string;
 }
