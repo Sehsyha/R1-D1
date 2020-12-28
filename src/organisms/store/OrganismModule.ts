@@ -29,6 +29,6 @@ export class OrganismModule extends VuexModule {
 
   @Action({ commit: 'add' })
   public async create({ name, categoryId }: CreateOrganismPayload): Promise<Organism> {
-    return ServiceFactory.getOrganismService().createOrganism(name, categoryId)
+    return ServiceFactory.getOrganismService().create(name, categoryId)
   }
 }
