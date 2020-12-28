@@ -36,16 +36,16 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getModule } from 'vuex-module-decorators'
 
-import CreateDocumentCategory from '@/components/CreateDocumentCategory.vue'
-import DisplayDocumentCategories from '@/components/DisplayDocumentCategories.vue'
-import CreateOrganism from '@/components/CreateOrganism.vue'
-import DisplayOrganisms from '@/components/DisplayOrganisms.vue'
-import CreateOrganismCategory from '@/components/CreateOrganismCategory.vue'
-import DisplayOrganismCategories from '@/components/DisplayOrganismCategories.vue'
+import CreateDocumentCategory from '@/documents/ui/CreateDocumentCategory.vue'
+import DisplayDocumentCategories from '@/documents/ui/DisplayDocumentCategories.vue'
+import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule'
 
+import CreateOrganism from '@/organisms/ui/CreateOrganism.vue'
+import DisplayOrganisms from '@/organisms/ui/DisplayOrganisms.vue'
+import CreateOrganismCategory from '@/organisms/ui/CreateOrganismCategory.vue'
+import DisplayOrganismCategories from '@/organisms/ui/DisplayOrganismCategories.vue'
 import { OrganismModule } from '@/organisms/store/OrganismModule'
 import { OrganismCategoryModule } from '@/organisms/store/OrganismCategoryModule'
-import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule'
 
 @Component({
   components: {
@@ -63,9 +63,9 @@ export default class Home extends Vue {
   public documentCategoryModule = getModule(DocumentCategoryModule)
 
   async created() {
-    // await this.organismModule.fetch()
-    // await this.organismCategoryModule.fetch()
-    // await this.documentCategoryModule.fetch()
+    await this.organismModule.fetch()
+    await this.organismCategoryModule.fetch()
+    await this.documentCategoryModule.fetch()
   }
 }
 </script>

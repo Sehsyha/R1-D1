@@ -2,11 +2,10 @@
   <form @submit.prevent="createOrganism">
     <input type="text" v-model="organismName" />
     <select v-model="organismCategoryId">
-      <option value="">Pas de catégorie</option>
       <option
         v-for="category in categories"
-        :key="category._id"
-        :value="category._id"
+        :key="category.id"
+        :value="category.id"
       >
         {{ category.name }}
       </option>

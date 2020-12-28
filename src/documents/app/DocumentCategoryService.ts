@@ -15,7 +15,7 @@ export class DocumentCategoryService {
   }
 
   public async create(name: string): Promise<DocumentCategory> {
-    const existingCategory = this.documentCategoryRepository.findByName(name)
+    const existingCategory = await this.documentCategoryRepository.findByName(name)
     if (existingCategory) {
       throw new Error(`La catégorie ${name} existe déjà`)
     }

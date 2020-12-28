@@ -19,7 +19,7 @@ export class OrganismService {
   }
 
   public async createOrganism(name: string, categoryId: string): Promise<Organism> {
-    const existingOrganism = this.organismRepository.findByName(name)
+    const existingOrganism = await this.organismRepository.findByName(name)
     if (existingOrganism) {
       throw new Error(`L'organisme avec le nom ${name} existe déjà`)
     }

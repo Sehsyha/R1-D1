@@ -26,4 +26,12 @@ export class Organism {
     this.name = name
     this.category = category
   }
+
+  public getId(): string {
+    return this.id
+  }
+
+  public getName(): string {
+    return this.name
+  }
 }

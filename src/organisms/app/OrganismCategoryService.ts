@@ -15,7 +15,7 @@ export class OrganismCategoryService {
   }
 
   public async create(name: string): Promise<OrganismCategory> {
-    const existingCategory = this.organismCategoryRepository.findByName(name)
+    const existingCategory = await this.organismCategoryRepository.findByName(name)
     if (existingCategory) {
       throw new Error(`La catégorie ${name} existe déjà`)
     }

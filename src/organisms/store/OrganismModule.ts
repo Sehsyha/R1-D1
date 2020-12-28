@@ -2,20 +2,11 @@ import store from '@/common/store'
 import { Organism } from '@/organisms/entities/Organism'
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { CreateOrganismPayload } from './payloads'
-import { OrganismService } from '@/organisms/app/OrganismService'
 import { ServiceFactory } from '@/common/factories/ServiceFactory'
 
 @Module({ dynamic: true, store, name: 'organism', namespaced: true })
 export class OrganismModule extends VuexModule {
-  private organisms: Organism[]
-  private organismService: OrganismService
-
-  constructor() {
-    super(VuexModule)
-
-    this.organisms = []
-    this.organismService = ServiceFactory.getOrganismService()
-  }
+  private organisms: Organism[] = []
 
   get all() {
     return this.organisms
@@ -33,11 +24,11 @@ export class OrganismModule extends VuexModule {
 
   @Action({ commit: 'set' })
   public async fetch(): Promise<Organism[]> {
-    return this.organismService.getAll()
+    return ServiceFactory.getOrganismService().getAll()
   }
 
   @Action({ commit: 'add' })
   public async create({ name, categoryId }: CreateOrganismPayload): Promise<Organism> {
-    return this.organismService.createOrganism(name, categoryId)
+    return ServiceFactory.getOrganismService().createOrganism(name, categoryId)
   }
 }
