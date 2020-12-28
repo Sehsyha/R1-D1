@@ -14,7 +14,7 @@ export class OrganismModule extends VuexModule {
 
   @Mutation
   public set(organisms: Organism[]) {
-    this.organisms = organisms
+    this.organisms = [...organisms]
   }
 
   @Mutation
