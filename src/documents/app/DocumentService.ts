@@ -1,7 +1,7 @@
-import { OrganismRepository } from '@/organisms/domain/OrganismRepository'
-import { Document } from './domain/Document'
-import { DocumentCategoryRepository } from './domain/DocumentCategoryRepository'
-import { DocumentRepository } from './domain/DocumentRepository'
+import { OrganismRepository } from '@/organisms/app/OrganismRepository'
+import { Document } from '../domain/Document'
+import { DocumentCategoryRepository } from './DocumentCategoryRepository'
+import { DocumentRepository } from './DocumentRepository'
 
 export class DocumentService {
   private documentRepository: DocumentRepository
