@@ -25,8 +25,8 @@ import { OrganismCategoryModule } from '@/organisms/store/OrganismCategoryModule
 
 @Component
 export default class CreateOrganism extends Vue {
-  organismCategoryModule: OrganismCategoryModule = getModule(OrganismCategoryModule)
-  organismModule: OrganismModule = getModule(OrganismModule)
+  organismCategoryModule = getModule(OrganismCategoryModule)
+  organismModule = getModule(OrganismModule)
   organismName = ''
   categoryId = ''
 

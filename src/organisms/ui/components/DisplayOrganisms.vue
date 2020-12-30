@@ -16,7 +16,7 @@ import { OrganismModule } from '@/organisms/store/OrganismModule'
 
 @Component
 export default class DisplayOrganisms extends Vue {
-  organismModule: OrganismModule = getModule(OrganismModule)
+  organismModule = getModule(OrganismModule)
 
   get organisms() {
     return this.organismModule.all

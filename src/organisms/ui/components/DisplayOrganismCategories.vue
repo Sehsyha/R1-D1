@@ -15,7 +15,7 @@ import { OrganismCategoryModule } from '@/organisms/store/OrganismCategoryModule
 
 @Component
 export default class DisplayOrganisCategories extends Vue {
-  organismCategoryModule: OrganismCategoryModule = getModule(OrganismCategoryModule)
+  organismCategoryModule = getModule(OrganismCategoryModule)
 
   get categories() {
     return this.organismCategoryModule.all

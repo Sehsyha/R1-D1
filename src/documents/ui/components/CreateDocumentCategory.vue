@@ -14,7 +14,7 @@ import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule
 
 @Component
 export default class CreateDocumentCategory extends Vue {
-  documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
+  documentCategoryModule = getModule(DocumentCategoryModule)
   name = ''
 
   createDocumentCategory() {

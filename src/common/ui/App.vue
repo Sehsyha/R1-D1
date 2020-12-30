@@ -23,8 +23,8 @@ import { OrganismModule } from '@/organisms/store/OrganismModule'
 export default class App extends Vue {
   organismCategoryModule = getModule(OrganismCategoryModule)
   organismModule = getModule(OrganismModule)
-  documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
-  documentModule: DocumentModule = getModule(DocumentModule)
+  documentCategoryModule = getModule(DocumentCategoryModule)
+  documentModule = getModule(DocumentModule)
 
   async mounted() {
     await InMemoryDefaultDataService.insertDefaultData()
