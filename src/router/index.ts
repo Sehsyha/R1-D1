@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 
-import Home from '@/common/ui/Home.vue'
+import Organism from '@/organisms/ui/pages/Organism.vue'
+import Document from '@/documents/ui/pages/Document.vue'
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/organisms',
+    name: 'Organisms',
+    component: Organism
+  },
+  {
+    path: '/documents',
+    name: 'Documents',
+    component: Document
   }
 ]
 
