@@ -43,11 +43,11 @@ describe('DocumentService', () => {
     )
   })
 
-  describe('createDocument', () => {
+  describe('create', () => {
     it('should create a new document', async () => {
       documentRepository.findByReference = jest.fn().mockResolvedValue(null)
 
-      const result = await documentService.createDocument(REFERENCE, DOCUMENT_CATEGORY_ID, ORGANISM_ID)
+      const result = await documentService.create(REFERENCE, DOCUMENT_CATEGORY_ID, ORGANISM_ID)
 
       expect(result).toEqual(DOCUMENT)
       expect(documentRepository.create).toHaveBeenCalledTimes(1)
@@ -58,7 +58,7 @@ describe('DocumentService', () => {
       documentRepository.findByReference = jest.fn().mockResolvedValue(DOCUMENT)
 
       try {
-        await documentService.createDocument(REFERENCE, DOCUMENT_CATEGORY_ID, ORGANISM_ID)
+        await documentService.create(REFERENCE, DOCUMENT_CATEGORY_ID, ORGANISM_ID)
         throw new Error('tested method did not throw any error')
       } catch (err) {
         expect(err.message).toBe(`Le document avec la référence "${REFERENCE}" existe déjà`)

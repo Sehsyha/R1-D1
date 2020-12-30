@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="createDocumentCategory">
-    <input type="text" v-model="documentCategoryName" />
+    <input type="text" v-model="name" placeholder="Nom"/>
     <input type="submit" value="Créer la catégorie de document" />
   </form>
 </template>
@@ -16,11 +16,11 @@ import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule
 export default class CreateDocumentCategory extends Vue {
   public documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
 
-  public documentCategoryName = ''
+  public name = ''
 
   public createDocumentCategory() {
-    if (this.documentCategoryName) {
-      this.documentCategoryModule.create(this.documentCategoryName)
+    if (this.name) {
+      this.documentCategoryModule.create(this.name)
     }
   }
 }
