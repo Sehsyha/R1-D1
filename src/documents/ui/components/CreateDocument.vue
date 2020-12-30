@@ -32,10 +32,10 @@ import { getModule } from 'vuex-module-decorators'
 
 import { DocumentModule } from '@/documents/store/DocumentModule'
 import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule'
-import { DocumentCategory } from '../entities/DocumentCategory'
+import { DocumentCategory } from '@/documents/entities/DocumentCategory'
 import { OrganismModule } from '@/organisms/store/OrganismModule'
 import { Organism } from '@/organisms/entities/Organism'
-import { CreateDocumentPayload } from '../store/payloads'
+import { CreateDocumentPayload } from '@/documents/store/payloads'
 
 @Component
 export default class CreateDocument extends Vue {

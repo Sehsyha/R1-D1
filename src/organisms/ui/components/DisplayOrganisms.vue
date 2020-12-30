@@ -17,7 +17,7 @@ import { getModule } from 'vuex-module-decorators'
 import { OrganismModule } from '@/organisms/store/OrganismModule'
 
 @Component
-export default class DisplayOrganisCategories extends Vue {
+export default class DisplayOrganisms extends Vue {
   public organismModule: OrganismModule = getModule(OrganismModule)
 
   get organisms() {
