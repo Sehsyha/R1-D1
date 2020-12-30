@@ -21,13 +21,12 @@ import { OrganismModule } from '@/organisms/store/OrganismModule'
 
 @Component
 export default class App extends Vue {
-  private organismCategoryModule = getModule(OrganismCategoryModule)
-  private organismModule = getModule(OrganismModule)
+  organismCategoryModule = getModule(OrganismCategoryModule)
+  organismModule = getModule(OrganismModule)
+  documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
+  documentModule: DocumentModule = getModule(DocumentModule)
 
-  public documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
-  public documentModule: DocumentModule = getModule(DocumentModule)
-
-  public async mounted() {
+  async mounted() {
     await InMemoryDefaultDataService.insertDefaultData()
     await this.documentCategoryModule.fetch()
     await this.documentModule.fetch()
