@@ -34,7 +34,5 @@ import DisplayDocumentCategories from '@/documents/ui/components/DisplayDocument
     DisplayDocumentCategories
   }
 })
-export default class Document extends Vue {
-
-}
+export default class Document extends Vue {}
 </script>

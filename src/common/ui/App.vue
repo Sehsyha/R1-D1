@@ -8,6 +8,35 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from 'vue'
+import { getModule } from 'vuex-module-decorators'
+import Component from 'vue-class-component'
+
+import { InMemoryDefaultDataService } from '@/common/adapters/InMemoryDefaultDataService'
+import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule'
+import { DocumentModule } from '@/documents/store/DocumentModule'
+import { OrganismCategoryModule } from '@/organisms/store/OrganismCategoryModule'
+import { OrganismModule } from '@/organisms/store/OrganismModule'
+
+@Component
+export default class App extends Vue {
+  private organismCategoryModule = getModule(OrganismCategoryModule)
+  private organismModule = getModule(OrganismModule)
+
+  public documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
+  public documentModule: DocumentModule = getModule(DocumentModule)
+
+  public async mounted() {
+    await InMemoryDefaultDataService.insertDefaultData()
+    await this.documentCategoryModule.fetch()
+    await this.documentModule.fetch()
+    await this.organismCategoryModule.fetch()
+    await this.organismModule.fetch()
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
