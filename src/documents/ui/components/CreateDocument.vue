@@ -39,13 +39,13 @@ import { CreateDocumentPayload } from '@/documents/store/payloads'
 
 @Component
 export default class CreateDocument extends Vue {
-  public organismModule: OrganismModule = getModule(OrganismModule)
-  public documentModule: DocumentModule = getModule(DocumentModule)
-  public documentCategoryModule: DocumentCategoryModule = getModule(DocumentCategoryModule)
+  organismModule = getModule(OrganismModule)
+  documentModule = getModule(DocumentModule)
+  documentCategoryModule = getModule(DocumentCategoryModule)
 
-  public reference = ''
-  public categoryId = ''
-  public organismId = ''
+  reference = ''
+  categoryId = ''
+  organismId = ''
 
   get categories (): DocumentCategory[] {
     return this.documentCategoryModule.all
@@ -55,7 +55,7 @@ export default class CreateDocument extends Vue {
     return this.organismModule.all
   }
 
-  public createDocument() {
+  createDocument() {
     if (this.reference && this.categoryId && this.organismId) {
       const { reference, categoryId, organismId } = this
       const payload: CreateDocumentPayload = {

@@ -15,6 +15,9 @@
 
       <h2>Création</h2>
       <CreateDocument />
+
+      <h2>Tous</h2>
+      <DisplayDocuments />
     </div>
   </div>
 </template>
@@ -26,12 +29,14 @@ import Component from 'vue-class-component'
 import CreateDocument from '@/documents/ui/components/CreateDocument.vue'
 import CreateDocumentCategory from '@/documents/ui/components/CreateDocumentCategory.vue'
 import DisplayDocumentCategories from '@/documents/ui/components/DisplayDocumentCategories.vue'
+import DisplayDocuments from '@/documents/ui/components/DisplayDocuments.vue'
 
 @Component({
   components: {
     CreateDocument,
     CreateDocumentCategory,
-    DisplayDocumentCategories
+    DisplayDocumentCategories,
+    DisplayDocuments
   }
 })
 export default class Document extends Vue {}

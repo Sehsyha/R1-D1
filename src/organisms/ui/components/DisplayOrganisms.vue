@@ -2,9 +2,7 @@
   <div>
     <div v-for="organism in organisms" :key="organism.id">
       {{ organism.name }}
-      <span v-if="organism.category">
-        Catégorie: {{ organism.category.name }}
-      </span>
+      Catégorie: {{ organism.category.name }}
     </div>
   </div>
 </template>
@@ -18,7 +16,7 @@ import { OrganismModule } from '@/organisms/store/OrganismModule'
 
 @Component
 export default class DisplayOrganisms extends Vue {
-  public organismModule: OrganismModule = getModule(OrganismModule)
+  organismModule = getModule(OrganismModule)
 
   get organisms() {
     return this.organismModule.all
