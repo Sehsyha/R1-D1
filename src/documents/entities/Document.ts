@@ -34,4 +34,12 @@ export class Document {
     this.category = category
     this.organism = organism
   }
+
+  public getId(): string {
+    return this.id
+  }
+
+  public getReference(): string {
+    return this.reference
+  }
 }

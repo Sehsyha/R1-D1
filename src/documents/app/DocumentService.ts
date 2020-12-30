@@ -22,7 +22,7 @@ export class DocumentService {
     this.generationService = generationService
   }
 
-  public async createDocument(reference: string, categoryId: string, organismId: string): Promise<Document> {
+  public async create(reference: string, categoryId: string, organismId: string): Promise<Document> {
     const existingDocument = await this.documentRepository.findByReference(reference)
     if (existingDocument) {
       throw new Error(`Le document avec la référence "${reference}" existe déjà`)
@@ -36,5 +36,9 @@ export class DocumentService {
 
     await this.documentRepository.create(document)
     return document
+  }
+
+  public async getAll(): Promise<Document[]> {
+    return this.documentRepository.findAll()
   }
 }

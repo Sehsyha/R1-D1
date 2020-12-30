@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="createOrganism">
     <input type="text" v-model="organismName" />
-    <select v-model="organismCategoryId">
+    <select v-model="categoryId">
       <option
         v-for="category in categories"
         :key="category.id"
@@ -29,17 +29,17 @@ export default class CreateOrganism extends Vue {
   public organismModule: OrganismModule = getModule(OrganismModule)
 
   public organismName = ''
-  public organismCategoryId = ''
+  public categoryId = ''
 
   get categories() {
     return this.organismCategoryModule.all
   }
 
   public createOrganism() {
-    if (this.organismName && this.organismCategoryId) {
+    if (this.organismName && this.categoryId) {
       const payload: CreateOrganismPayload = {
         name: this.organismName,
-        categoryId: this.organismCategoryId
+        categoryId: this.categoryId
       }
 
       this.organismModule.create(payload)
