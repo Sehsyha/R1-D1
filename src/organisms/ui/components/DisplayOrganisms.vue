@@ -2,9 +2,7 @@
   <div>
     <div v-for="organism in organisms" :key="organism.id">
       {{ organism.name }}
-      <span v-if="organism.category">
-        Catégorie: {{ organism.category.name }}
-      </span>
+      Catégorie: {{ organism.category.name }}
     </div>
   </div>
 </template>
