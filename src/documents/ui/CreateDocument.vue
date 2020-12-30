@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="createDocument">
     <input type="text" v-model="reference" placeholder="Référence"/>
+
     <select v-model="categoryId">
       <option
         v-for="category in categories"
@@ -10,6 +11,7 @@
         {{ category.name }}
       </option>
     </select>
+
     <select v-model="organismId">
       <option
         v-for="organism in organisms"
@@ -33,6 +35,7 @@ import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule
 import { DocumentCategory } from '../entities/DocumentCategory'
 import { OrganismModule } from '@/organisms/store/OrganismModule'
 import { Organism } from '@/organisms/entities/Organism'
+import { CreateDocumentPayload } from '../store/payloads'
 
 @Component
 export default class CreateDocument extends Vue {
@@ -54,7 +57,14 @@ export default class CreateDocument extends Vue {
 
   public createDocument() {
     if (this.reference && this.categoryId && this.organismId) {
-      this.documentModule.create(this.reference, this.categoryId, this.organismId)
+      const { reference, categoryId, organismId } = this
+      const payload: CreateDocumentPayload = {
+        reference,
+        categoryId,
+        organismId
+      }
+
+      this.documentModule.create(payload)
     }
   }
 }

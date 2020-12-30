@@ -4,6 +4,7 @@ import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators'
 import { ServiceFactory } from '@/common/factories/ServiceFactory'
 
 import { Document } from '../entities/Document'
+import { CreateDocumentPayload } from './payloads'
 
 @Module({ dynamic: true, store, name: 'document', namespaced: true })
 export class DocumentModule extends VuexModule {
@@ -33,7 +34,7 @@ export class DocumentModule extends VuexModule {
   }
 
   @Action({ commit: 'add' })
-  public async create(reference: string, categoryId: string, organismId: string): Promise<Document> {
+  public async create({ reference, categoryId, organismId }: CreateDocumentPayload): Promise<Document> {
     return ServiceFactory.getDocumentService().create(reference, categoryId, organismId)
   }
 }

@@ -1,22 +1,6 @@
 <template>
   <div class="home">
     <div>
-      <h1>Catégorie de document</h1>
-
-      <h2>Création</h2>
-      <CreateDocumentCategory />
-
-      <h2>Tous</h2>
-      <DisplayDocumentCategories />
-    </div>
-
-    <div>
-      <h1>Documents </h1>
-      <h2>Création</h2>
-      <CreateDocument />
-    </div>
-
-    <div>
       <h1>Catégorie d'organisme</h1>
 
       <h2>Création</h2>
@@ -33,6 +17,22 @@
 
       <h2>Tous</h2>
       <DisplayOrganisms />
+    </div>
+    <div>
+      <h1>Catégorie de document</h1>
+
+      <h2>Création</h2>
+      <CreateDocumentCategory />
+
+      <h2>Tous</h2>
+      <DisplayDocumentCategories />
+    </div>
+
+    <div>
+      <h1>Documents </h1>
+
+      <h2>Création</h2>
+      <CreateDocument />
     </div>
   </div>
 </template>
