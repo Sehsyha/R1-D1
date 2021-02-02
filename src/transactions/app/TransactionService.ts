@@ -24,10 +24,17 @@ export class TransactionService {
 
   public async create(amount: number, organismId: string, note?: string, documentId?: string): Promise<Transaction> {
     const organism = await this.organismRepository.findById(organismId)
+    if (!organism) {
+      throw new Error(`L'organisme ${organismId} n'a pas été trouvé`)
+    }
+
     const document = documentId ? await this.documentRepository.findById(documentId) ?? undefined : undefined
+    if (documentId && !document) {
+      throw new Error(`Le document ${documentId} n'a pas été trouvé'`)
+    }
 
     const id = this.generationService.id()
-    const transaction = new Transaction(id, amount, organism, note, document)
+    const transaction = new Transaction(id, amount, organismId, note, documentId)
 
     await this.transactionRepository.create(transaction)
 
