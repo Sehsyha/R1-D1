@@ -12,6 +12,10 @@ export class DocumentInMemoryRepository implements DocumentRepository {
     return this.documents
   }
 
+  public async findById(id: string): Promise<Document | null> {
+    return this.documents.find(document => document.getId() === id) ?? null
+  }
+
   public async findByReference(reference: string): Promise<Document | null> {
     return this.documents.find(document => document.getReference() === reference) ?? null
   }

@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/organisms">Organismes</router-link>
       <router-link to="/documents">Documents</router-link>
+      <router-link to="/transactions">Transactions</router-link>
     </div>
     <router-view/>
   </div>
@@ -18,6 +19,7 @@ import { DocumentCategoryModule } from '@/documents/store/DocumentCategoryModule
 import { DocumentModule } from '@/documents/store/DocumentModule'
 import { OrganismCategoryModule } from '@/organisms/store/OrganismCategoryModule'
 import { OrganismModule } from '@/organisms/store/OrganismModule'
+import { TransactionModule } from '@/transactions/store/TransactionModule'
 
 @Component
 export default class App extends Vue {
@@ -25,6 +27,7 @@ export default class App extends Vue {
   organismModule = getModule(OrganismModule)
   documentCategoryModule = getModule(DocumentCategoryModule)
   documentModule = getModule(DocumentModule)
+  transactionModule = getModule(TransactionModule)
 
   async mounted() {
     await InMemoryDefaultDataService.insertDefaultData()
@@ -32,6 +35,7 @@ export default class App extends Vue {
     await this.documentModule.fetch()
     await this.organismCategoryModule.fetch()
     await this.organismModule.fetch()
+    await this.transactionModule.fetch()
   }
 }
 </script>

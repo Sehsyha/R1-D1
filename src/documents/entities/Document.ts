@@ -42,4 +42,8 @@ export class Document {
   public getReference(): string {
     return this.reference
   }
+
+  public getOrganismId(): string {
+    return this.organism.getId()
+  }
 }

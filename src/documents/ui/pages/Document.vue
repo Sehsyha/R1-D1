@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>Catégorie de document</h1>
+      <h1>Catégories de document</h1>
 
       <h2>Création</h2>
       <CreateDocumentCategory />
@@ -11,7 +11,7 @@
     </div>
 
     <div>
-      <h1>Documents </h1>
+      <h1>Documents</h1>
 
       <h2>Création</h2>
       <CreateDocument />

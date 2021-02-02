@@ -2,6 +2,7 @@ import { DocumentCategoryService } from '@/documents/app/DocumentCategoryService
 import { DocumentService } from '@/documents/app/DocumentService'
 import { OrganismCategoryService } from '@/organisms/app/OrganismCategoryService'
 import { OrganismService } from '@/organisms/app/OrganismService'
+import { TransactionService } from '@/transactions/app/TransactionService'
 import { Singleton } from '@/utils/Singleton.decorator'
 import { GenerationServiceImpl } from '../adapters/GenerationServiceImpl'
 import { GenerationService } from '../app/GenerationService'
@@ -39,6 +40,16 @@ export class ServiceFactory {
     return new OrganismService(
       RepositoryFactory.getOrganismRepository(),
       RepositoryFactory.getOrganismCategoryRepository(),
+      ServiceFactory.getGenerationService()
+    )
+  }
+
+  @Singleton()
+  public static getTransactionService(): TransactionService {
+    return new TransactionService(
+      RepositoryFactory.getTransactionRepository(),
+      RepositoryFactory.getOrganismRepository(),
+      RepositoryFactory.getDocumentRepository(),
       ServiceFactory.getGenerationService()
     )
   }
