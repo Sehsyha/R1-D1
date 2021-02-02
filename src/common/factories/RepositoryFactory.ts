@@ -6,6 +6,8 @@ import { OrganismCategoryInMemoryRepository } from '@/organisms/adapters/Organis
 import { OrganismInMemoryRepository } from '@/organisms/adapters/OrganismInMemoryRepository'
 import { OrganismCategoryRepository } from '@/organisms/app/OrganismCategoryRepository'
 import { OrganismRepository } from '@/organisms/app/OrganismRepository'
+import { TransactionInMemoryRepository } from '@/transactions/adapters/TransactionInMemoryRepository'
+import { TransactionRepository } from '@/transactions/app/TransactionRepository'
 import { Singleton } from '@/utils/Singleton.decorator'
 
 export class RepositoryFactory {
@@ -27,5 +29,10 @@ export class RepositoryFactory {
   @Singleton()
   public static getOrganismCategoryRepository(): OrganismCategoryRepository {
     return new OrganismCategoryInMemoryRepository()
+  }
+
+  @Singleton()
+  public static getTransactionRepository(): TransactionRepository {
+    return new TransactionInMemoryRepository()
   }
 }

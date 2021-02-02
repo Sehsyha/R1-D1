@@ -6,10 +6,13 @@ export class InMemoryDefaultDataService {
     const organismCategory1 = await organismCategoryService.create('Cotisations')
 
     const organismService = ServiceFactory.getOrganismService()
-    await organismService.create('URSSAF', organismCategory1.getId())
+    const organism = await organismService.create('URSSAF', organismCategory1.getId())
 
     const documentCategoryService = ServiceFactory.getDocumentCategoryService()
-    await documentCategoryService.create('Factures')
+    const documentCategory = await documentCategoryService.create('Factures')
     await documentCategoryService.create('Devis')
+
+    const documentService = ServiceFactory.getDocumentService()
+    await documentService.create('FA0001', documentCategory.getId(), organism.getId())
   }
 }
